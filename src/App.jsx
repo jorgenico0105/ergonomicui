@@ -54,10 +54,20 @@ function App() {
       console.error('Error en el análisis:', error);
 
       let errorMessage = 'Error al procesar el análisis';
-      if (error.response) {
-        console.log(error)
+
+      // Usar el mensaje personalizado del error si existe
+      if (error.message) {
+        errorMessage = error.message;
+      } else if (error.response) {
+        // Error del servidor con respuesta
+        errorMessage = error.response.data?.error ||
+                      error.response.data?.message ||
+                      `Error del servidor: ${error.response.status}`;
+        console.log('Server error:', error.response);
       } else if (error.request) {
-        console.log(error)
+        // Error de red sin respuesta
+        errorMessage = 'No se pudo conectar con el servidor. El servidor puede estar en modo sleep (Render free tier). Espera 1 minuto e intenta de nuevo.';
+        console.log('Network error:', error.request);
       }
 
       alert(errorMessage);
