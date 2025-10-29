@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'http://172.16.10.87:3000';
+const API_BASE_URL = 'https://ergonomic-poses-2.onrender.com';
 
 export const API_ENDPOINTS = {
   ergonomico: `${API_BASE_URL}/api/analisis-ergonomico/analyze`,
